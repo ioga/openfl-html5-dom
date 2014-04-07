@@ -15,6 +15,7 @@ import flash.net.NetStream;
 import flash.Lib;
 import js.html.CanvasElement;
 import js.html.MediaElement;
+import js.Browser;
 
 
 class Video extends DisplayObject {
@@ -76,10 +77,6 @@ class Video extends DisplayObject {
 		
 		ns.__videoElement.style.setProperty ("width", width + "px", "");
 		ns.__videoElement.style.setProperty ("height", height + "px", "");
-		ns.__videoElement.addEventListener ("error", ns.__notFound, false);
-		ns.__videoElement.addEventListener ("waiting", ns.__bufferEmpty, false);
-		ns.__videoElement.addEventListener ("ended", ns.__bufferStop, false);
-		ns.__videoElement.addEventListener ("play", ns.__bufferStart, false);	
 		ns.__videoElement.play ();
 		
 	}
@@ -97,6 +94,11 @@ class Video extends DisplayObject {
 		__graphics.drawRect (0, 0, width, height);
 		
 	}
+		
+	
+	override private function __getGraphics ():Graphics {
+        return __graphics;
+    }
 	
 	
 	override public function __getObjectUnderPoint (point:Point):InteractiveObject {
@@ -141,5 +143,35 @@ class Video extends DisplayObject {
 		
 	}
 	
-	
+   override function validateBounds ():Void {
+        
+        if (_boundsInvalid) {
+            
+            super.validateBounds ();
+            
+            if ((width == 0) && (height == 0)) {
+                
+                var r = new Rectangle (0, 0, 320, 240);      
+                
+                if (r.width != 0 || r.height != 0) {
+                    
+                    if (__boundsRect.width == 0 && __boundsRect.height == 0) {
+                        
+                        __boundsRect = r.clone ();
+                        
+                    } else {
+                        
+                        __boundsRect.extendBounds (r);
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            __setDimensions ();
+            
+        }
+        
+    }
 }
