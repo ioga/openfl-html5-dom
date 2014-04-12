@@ -502,7 +502,7 @@ class DisplayObjectContainer extends InteractiveObject {
 		
 		//** FINAL **//	
 		
-		if (!_matrixChainInvalid && !_matrixInvalid) {	
+		if (!_matrixChainInvalid && !_matrixInvalid && __children != null) {	
 			
 			for (child in __children) {
 				
