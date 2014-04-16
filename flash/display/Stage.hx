@@ -37,7 +37,8 @@ class Stage extends DisplayObjectContainer {
 	public static var __acceleration:Acceleration = { x: 0.0, y: 1.0, z: 0.0 };
 	
 	public var align:StageAlign;
-	public var backgroundColor (get_backgroundColor, set_backgroundColor):Int;
+	public var backgroundColor (get_backgroundColor, set_backgroundColor):Int; // Keeping for backward compatibility, for now
+	public var color (get, set):Int;
 	@:isVar public var displayState (get_displayState, set_displayState):StageDisplayState;
 	public var focus (get_focus, set_focus):InteractiveObject;
 	public var frameRate (get_frameRate, set_frameRate):Float;
@@ -565,13 +566,17 @@ class Stage extends DisplayObjectContainer {
 			
 			if (__focusObject != null) {
 				
-				__focusObject.__fireEvent (new FocusEvent (FocusEvent.FOCUS_OUT, true, false, __focusObject, false, 0));
+				var focusOut = new FocusEvent (FocusEvent.FOCUS_OUT, true, false, target, false, 0);
+				focusOut.target = __focusObject;
+				__focusObject.__fireEvent (focusOut);
 				
 			}
 			
 			// Now dispatch a focus in event similarly using Flash event
 			// propogation semantics
-			target.__fireEvent (new FocusEvent (FocusEvent.FOCUS_IN, true, false, target, false, 0));
+			var focusIn = new FocusEvent (FocusEvent.FOCUS_IN, true, false, __focusObject, false, 0);
+			focusIn.target = target;
+			target.__fireEvent (focusIn);
 			
 			// Finally, store the updated focus object
 			__focusObject = target;
@@ -710,6 +715,9 @@ class Stage extends DisplayObjectContainer {
 	
 	private function get_backgroundColor ():Int { return __backgroundColour; }
 	private function set_backgroundColor (col:Int):Int { return __backgroundColour = col; }
+	
+	private function get_color ():Int { return __backgroundColour; }
+	private function set_color (col:Int):Int { return __backgroundColour = col; }
 	
 	
 	private inline function get_displayState ():StageDisplayState { return this.displayState; }

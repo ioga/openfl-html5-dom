@@ -22,8 +22,10 @@ class BitmapFilter {
 	
 	public function clone ():BitmapFilter {
 		
-		throw "Implement in subclass. BitmapFilter::clone";
-		return null;
+		return new BitmapFilter (_mType);
+		
+		//throw "Implement in subclass. BitmapFilter::clone";
+		//return null;
 		
 	}
 	

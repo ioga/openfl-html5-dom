@@ -1,6 +1,7 @@
 package flash.display;
 
 
+import flash.errors.RangeError;
 import flash.events.Event;
 import flash.geom.Matrix;
 import flash.geom.Point;
@@ -202,6 +203,41 @@ class DisplayObjectContainer extends InteractiveObject {
 		}
 		
 		throw "removeChildAt(" + index + ") : none found?";
+		
+	}
+	
+	
+	public function removeChildren (beginIndex:Int = 0, endIndex:Int = 0x7FFFFFFF):Void {
+		
+		if (endIndex == 0x7FFFFFFF) { 
+			
+			endIndex = __children.length - 1;
+			
+			if (endIndex < 0) {
+				
+				return;
+				
+			}
+			
+		}
+		
+		if (beginIndex > __children.length - 1) {
+			
+			return;
+			
+		} else if (endIndex < beginIndex || beginIndex < 0 || endIndex > __children.length) {
+			
+			throw new RangeError ("The supplied index is out of bounds.");
+			
+		}
+		
+		var numRemovals = endIndex - beginIndex;
+		while (numRemovals >= 0) {
+			
+			removeChildAt (beginIndex);
+			numRemovals--;
+			
+		}
 		
 	}
 	

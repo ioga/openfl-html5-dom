@@ -1,5 +1,4 @@
 package flash.system;
-#if js
 
 
 class Security {

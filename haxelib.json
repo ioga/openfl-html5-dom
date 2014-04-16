@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL support for HTML5 (using the DOM)",
-	"version": "1.1.0",
-	"releasenote": "Rename from openfl-html5",
+	"version": "1.2.1",
+	"releasenote": "Minor patches and feature improvements",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }

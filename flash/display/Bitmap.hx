@@ -32,7 +32,7 @@ class Bitmap extends DisplayObject {
 		if (inBitmapData != null) {
 			
 			this.bitmapData = inBitmapData;
-			bitmapData.__referenceCount++;
+			//bitmapData.__referenceCount++;
 			
 			if (bitmapData.__referenceCount == 1) {
 				
