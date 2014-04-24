@@ -1033,10 +1033,18 @@ class Graphics {
 		maxX = __extent.width + minX;
 		maxY = __extent.height + minY;
 		
-		maxX = x > maxX ? x : maxX;
-		minX = x < minX ? x : minX;
-		maxY = y > maxY ? y : maxY;
-		minY = y < minY ? y : minY;
+		var radius = thickness / 2;
+		var newMaxX, newMinX, newMaxY, newMinY;
+		
+		newMaxX = x + radius;
+		newMinX = x - radius;
+		newMaxY = y + radius;
+		newMinY = y - radius;
+		
+		maxX = Math.max(newMaxX, maxX);
+		minX = Math.min(newMinX, minX);
+		maxY = Math.max(newMaxY, maxY);
+		minY = Math.min(newMinY, minY);
 		
 		__extent.x = minX;
 		__extent.y = minY;
