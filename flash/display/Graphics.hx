@@ -1033,7 +1033,7 @@ class Graphics {
 		maxX = __extent.width + minX;
 		maxY = __extent.height + minY;
 		
-		var radius = thickness / 2;
+		var radius = _padding / 2;
 		var newMaxX, newMinX, newMaxY, newMinY;
 		
 		newMaxX = x + radius;
